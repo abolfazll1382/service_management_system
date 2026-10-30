@@ -1,0 +1,80 @@
+/** Customer-facing copy: authentication and the service catalog. */
+export const auth = {
+  register: {
+    title: "Create your account",
+    subtitle: "Register once with your identity details. You need an account to submit requests.",
+    identity: "Identity",
+    contact: "Contact",
+    security: "Security",
+    submit: "Create account",
+    haveAccount: "Already registered?",
+    notice: "This is a demonstration portal. Use sample details — everything you enter stays in this browser.",
+    sample: "Fill sample details",
+    accept: "I confirm these details are accurate.",
+    success: "Account created. Welcome!",
+  },
+  login: {
+    title: "Sign in",
+    subtitle: "Use the National ID and password you registered with.",
+    submit: "Sign in",
+    noAccount: "New here?",
+    success: "Signed in.",
+  },
+  staffLogin: {
+    title: "Staff sign-in",
+    subtitle: "For portal staff and administrators.",
+    submit: "Sign in to console",
+  },
+  placeholders: {
+    fullName: "e.g. Ali Rezaei",
+    nationalId: "10 digits",
+    phone: "09xxxxxxxxx",
+    postalCode: "10 digits",
+    address: "Province, city, street, number",
+    username: "e.g. reza",
+    password: "At least 8 characters",
+  },
+  demoAccounts: {
+    title: "Demo accounts",
+    note: "Every account below uses the password {password}. Select one to fill the form.",
+    use: "Use",
+  },
+  needAccount: "Sign in or register to submit a request.",
+} as const;
+
+export const catalog = {
+  hero: {
+    eyebrow: "Services & requests",
+    title: "Apply for a service. Follow every step of your request.",
+    subtitle: "Browse what's offered, register once, and track your request from submission to decision.",
+    browse: "Browse services",
+  },
+  home: { serviceCount: "{count} services" },
+  steps: {
+    title: "How it works",
+    register: { title: "Register once", body: "Create an account with your National ID and mobile number." },
+    choose: { title: "Choose a service", body: "Pick a service and fill in the details it needs." },
+    track: { title: "Track the result", body: "A staff member handles it. Follow progress and reply here." },
+  },
+  list: {
+    title: "Available services",
+    allDepartments: "All departments",
+    eta: "About {days} days",
+    unavailable: "Not accepting requests",
+    viewDetails: "View details",
+  },
+  detail: {
+    back: "All services",
+    about: "About this service",
+    prepare: "Before you apply",
+    processing: "Typical processing time",
+    department: "Department",
+    days: "{days} days",
+    apply: "Apply for this service",
+    registerToApply: "Register to apply",
+    signInToApply: "I already have an account",
+    unavailable: "This service isn't accepting requests right now.",
+    staffNotice: "You're signed in as staff, so you can't submit customer requests.",
+    notFound: "That service doesn't exist.",
+  },
+} as const;

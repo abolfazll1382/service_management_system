@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens.
+ *
+ * The palette comes from the subject: lapis (the deep blue of old manuscript
+ * covers and ink) for structure and text, turquoise (the glaze on tilework)
+ * for the one thing a person is meant to press, and a single saffron for
+ * "this needs attention". Everything else is cool paper and hairlines.
+ * Lapis/turquoise rather than a flag-like palette on purpose — this is a
+ * demonstration portal and must not read as any real institution's brand.
+ */
+@theme inline {
+  --font-sans: var(--font-vazirmatn), ui-sans-serif, system-ui, sans-serif;
+}
+
+@theme {
+  --color-ink-50: #f4f6fa;
+  --color-ink-100: #e7ebf3;
+  --color-ink-200: #d0d7e6;
+  --color-ink-300: #aab5cd;
+  --color-ink-400: #7e8daf;
+  --color-ink-500: #566890;
+  --color-ink-600: #405079;
+  --color-ink-700: #2f3f64;
+  --color-ink-800: #1f2e4e;
+  --color-ink-900: #152341;
+  --color-ink-950: #0c162d;
+
+  --color-tile-50: #eaf7f7;
+  --color-tile-100: #d1eeee;
+  --color-tile-200: #a6dddd;
+  --color-tile-300: #6fc5c8;
+  --color-tile-400: #38a7ad;
+  --color-tile-500: #1b8b93;
+  --color-tile-600: #0f727a;
+  --color-tile-700: #0d5c63;
+  --color-tile-800: #0d4a50;
+  --color-tile-900: #0c3d42;
+
+  --color-saffron-50: #fdf6e3;
+  --color-saffron-100: #faebba;
+  --color-saffron-300: #ecc566;
+  --color-saffron-500: #cf9617;
+  --color-saffron-700: #8c6007;
+
+  --color-paper: #f5f7fa;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  @apply bg-paper font-sans text-ink-900 antialiased;
+  /* Persian script has tall ascenders and dots above and below the line:
+     it needs more leading than Latin to stay readable. */
+  line-height: 1.75;
+}
+
+/* Locks page scroll while a native <dialog> is open. */
+body:has(dialog[open]) {
+  overflow: hidden;
+}
+
+/* Dialogs are positioned by the browser's top layer; just style the surface. */
+dialog::backdrop {
+  background: color-mix(in srgb, var(--color-ink-950) 55%, transparent);
+}
+
+/*
+ * Numbers and codes are typed and read left-to-right even on a right-to-left
+ * page (an 11-digit mobile number must not be reordered by the bidi
+ * algorithm). The box keeps the label's side so the form still lines up.
+ */
+html[dir="rtl"] input[data-numeric] {
+  direction: ltr;
+  text-align: right;
+}
+html[dir="ltr"] input[data-numeric] {
+  direction: ltr;
+  text-align: left;
+}
+
+/*
+ * A quiet tessellation of eight-pointed stars, drawn in SVG so it scales
+ * crisply and costs one tiny data URI. It appears once, behind the home page
+ * hero, and nowhere else.
+ */
+.pattern-stars {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.09' stroke-width='1'%3E%3Crect x='19' y='19' width='34' height='34'/%3E%3Crect x='19' y='19' width='34' height='34' transform='rotate(45 36 36)'/%3E%3Crect x='-6' y='-6' width='12' height='12' transform='rotate(45 0 0)'/%3E%3Crect x='66' y='-6' width='12' height='12' transform='rotate(45 72 0)'/%3E%3Crect x='-6' y='66' width='12' height='12' transform='rotate(45 0 72)'/%3E%3Crect x='66' y='66' width='12' height='12' transform='rotate(45 72 72)'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 72px 72px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

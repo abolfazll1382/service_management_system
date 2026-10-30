@@ -1,0 +1,62 @@
+# Demo stack: PostgreSQL 16 + the API, started with `docker compose up --build`.
+#
+#   API        http://localhost:8000        (Swagger UI at /api/docs/, health at /health/)
+#   Database   127.0.0.1:5432               (only on this machine; user/password/db = portal)
+#
+# THIS FILE IS A DEMO CONFIGURATION, NOT A PRODUCTION ONE: it seeds accounts that share a public
+# password, switches on the "reset everything" endpoint and the API docs, serves plain HTTP and
+# ships a placeholder secret key. Read the README ("Going beyond the demo") before deploying.
+# Variables can be overridden from the shell or from a `.env` file next to this file.
+name: citizen-services
+
+services:
+  db:
+    image: postgres:16-bookworm
+    environment:
+      POSTGRES_DB: portal
+      POSTGRES_USER: portal
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-portal}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:${DB_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U portal -d portal"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 10s
+    restart: unless-stopped
+
+  web:
+    build: .
+    image: citizen-services-api:latest
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.production
+      # Placeholder that satisfies the production check (>= 50 characters, not "django-insecure").
+      # Tokens are random database-backed values, not signed with this key, but still replace it.
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-demo-stack-only-placeholder-secret-replace-it-before-any-real-use-0123456789}
+      DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-localhost,127.0.0.1}
+      DATABASE_URL: postgres://portal:${POSTGRES_PASSWORD:-portal}@db:5432/portal
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost:3000,http://127.0.0.1:3000}
+      # Plain HTTP on localhost: no redirect to HTTPS and no HSTS pin in anybody's browser.
+      DJANGO_SECURE_SSL_REDIRECT: "false"
+      DJANGO_SECURE_HSTS_SECONDS: "0"
+      DJANGO_BEHIND_PROXY: "false"
+      # Demo tooling (see README): seeded accounts, the reset endpoint and the API docs.
+      SEED_DEMO_DATA: "true"
+      ENABLE_DEMO_RESET: "true"
+      ENABLE_API_DOCS: "true"
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    ports:
+      # Loopback only: the demo's accounts share a public password.
+      - "127.0.0.1:${API_PORT:-8000}:8000"
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    restart: unless-stopped
+
+volumes:
+  pgdata:

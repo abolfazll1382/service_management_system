@@ -1,0 +1,81 @@
+import type { Dictionary } from "../../types";
+
+export const request: Dictionary["request"] = {
+  wizard: {
+    title: "درخواست: {service}",
+    progress: "پیشرفت ثبت درخواست",
+    steps: { applicant: "مشخصات شما", details: "جزئیات درخواست", review: "بازبینی و ثبت" },
+    applicant: {
+      title: "تأیید مشخصات",
+      subtitle: "از اطلاعات حساب شما استفاده می‌شود و در اینجا قابل تغییر نیست.",
+      notice: "این اطلاعات را با دقت بررسی کنید؛ کارشناسان از همین راه با شما تماس می‌گیرند.",
+    },
+    details: {
+      title: "جزئیات درخواست",
+      subtitle: "به تیم {department} بگویید چه نیازی دارید.",
+      description: "توضیحات تکمیلی",
+      descriptionHint: "تاریخ‌ها، مبالغ، شماره‌های مرجع — هر چیزی که به تصمیم‌گیری کارشناس کمک کند.",
+      descriptionPlaceholder: "درخواست خود را شرح دهید…",
+      range: "بین {min} و {max}",
+    },
+    review: {
+      title: "بازبینی و ثبت",
+      subtitle: "پیش از ارسال، همه موارد را بررسی کنید.",
+      service: "خدمت",
+      department: "بخش",
+      confirm: "تأیید می‌کنم اطلاعات فوق صحیح است.",
+    },
+    submit: "ثبت درخواست",
+    success: "درخواست ثبت شد. کد رهگیری شما {code} است.",
+    done: {
+      title: "درخواست ثبت شد",
+      body: "این کد رهگیری را نگه دارید. از بخش «درخواست‌های من» می‌توانید پیشرفت کار را ببینید و به کارکنان پاسخ دهید.",
+      viewRequest: "مشاهدهٔ این درخواست",
+    },
+  },
+  mine: {
+    title: "درخواست‌های من",
+    subtitle: "همه درخواست‌هایی که ثبت کرده‌اید را پیگیری کنید.",
+    new: "درخواست جدید",
+    empty: { title: "هنوز درخواستی ندارید", body: "یک خدمت را انتخاب کنید و اولین درخواست خود را ثبت کنید." },
+    browse: "مشاهده خدمات",
+    columns: {
+      tracking: "کد رهگیری",
+      service: "خدمت",
+      department: "بخش",
+      status: "وضعیت",
+      submitted: "تاریخ ثبت",
+    },
+    error: "بارگذاری درخواست‌ها ممکن نشد.",
+  },
+  detail: {
+    title: "جزئیات درخواست",
+    tracking: "کد رهگیری",
+    copyCode: "کپی کد رهگیری",
+    sections: { summary: "خلاصه", answers: "اطلاعات واردشده", activity: "سوابق" },
+    labels: {
+      service: "خدمت",
+      department: "بخش",
+      submitted: "تاریخ ثبت",
+      assignedTo: "کارشناس رسیدگی‌کننده",
+      description: "توضیحات",
+      status: "وضعیت",
+    },
+    unassigned: "هنوز تعیین نشده",
+    reply: {
+      label: "ارسال پیام",
+      placeholder: "پیام خود را برای تیم بنویسید…",
+      send: "ارسال پیام",
+      closedNote: "این درخواست بسته شده است.",
+      sent: "پیام ارسال شد.",
+    },
+  },
+  timeline: {
+    submitted: "{actor} درخواست را ثبت کرد",
+    status_changed: "{actor} وضعیت را از «{from}» به «{to}» تغییر داد",
+    assigned: "{actor} درخواست را به {assignee} واگذار کرد",
+    unassigned: "{actor} کارشناس رسیدگی‌کننده را حذف کرد",
+    message: "{actor} نوشت",
+    internal: "یادداشت داخلی",
+  },
+};

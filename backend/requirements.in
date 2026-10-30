@@ -1,0 +1,10 @@
+# Direct runtime dependencies. `requirements.txt` is the complete, pinned lock generated from this
+# file (see the header there); `requirements-dev.txt` adds the development tools.
+Django==5.2.18                 # 5.2 is the current long-term-support release
+djangorestframework==3.18.3
+django-environ==0.14.0         # 12-factor settings
+django-cors-headers==4.9.0
+psycopg[binary]==3.3.6         # PostgreSQL driver (binary wheels: no compiler / libpq needed)
+argon2-cffi==25.1.0            # Argon2id password hashing
+gunicorn==26.2.0
+drf-spectacular==0.30.0        # OpenAPI 3

@@ -1,0 +1,29 @@
+# Complete runtime lock: every direct dependency (requirements.in) and everything it pulls in,
+# pinned. Generated on Python 3.13 in a clean virtualenv:
+#     python -m venv /tmp/lock && /tmp/lock/bin/pip install -r requirements.in && /tmp/lock/bin/pip freeze
+# Every pin ships a binary wheel for Linux x86-64 and aarch64 (the Docker build installs with
+# --only-binary=:all:, so it needs no compiler). Update by regenerating, then run `make check`.
+argon2-cffi==25.1.0
+argon2-cffi-bindings==26.1.0
+asgiref==3.13.0
+attrs==26.1.0
+cffi==2.1.1
+Django==5.2.18
+django-cors-headers==4.9.0
+django-environ==0.14.0
+djangorestframework==3.18.3
+drf-spectacular==0.30.0
+gunicorn==26.2.0
+inflection==0.5.1
+jsonschema==4.26.0
+jsonschema-specifications==2025.9.1
+psycopg==3.3.6
+psycopg-binary==3.3.6
+pycparser==3.12
+PyYAML==6.0.3
+referencing==0.37.0
+rpds-py==2026.9.1
+sqlparse==0.6.0
+uritemplate==4.2.0
+# Needed only on Python 3.12 (psycopg and referencing import it there; 3.13 has it built in):
+typing-extensions==4.16.0; python_version < "3.13"
